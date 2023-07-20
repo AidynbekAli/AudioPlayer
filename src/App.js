@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useRef } from "react";
+
+import AudioMp3 from "../src/audio/Tom Odell - Another Love (Explicit Edit).mp3";
+import "./App.css";
+
+import Button from "./UI/Button";
+
 
 function App() {
+  const audioRef = useRef(null);
+
+  const playAudio = () => {
+    audioRef.current.play();
+  };
+
+  const pauseAudio = () => {
+    audioRef.current.pause();
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 style={{color:"white"}}>Audio Player</h1>
+      <audio ref={audioRef} controls>
+        <source src={AudioMp3} type="audio/mpeg" />
+      </audio>
+      <div style={{display:"flex", justifyContent:"center", gap:"30px"}}>
+        <Button onClick={playAudio}>Play</Button>
+        <Button onClick={pauseAudio}>Pause</Button>
+      </div>
     </div>
   );
 }
 
 export default App;
+
+
+
+
+
